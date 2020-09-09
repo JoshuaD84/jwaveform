@@ -1,9 +1,11 @@
 /visual-studio-17-workspace/.vs/*
 *.class
 /bin/*
-/visual-studio-17-workspace/HypnosNativeSoundWin*
+/visual-studio-17-workspace/HypnosNativeSoundWin/x64
+/visual-studio-17-workspace/HypnosNativeSoundWin/Debug
 /visual-studio-17-workspace/**/*.lib
 /visual-studio-17-workspace/**/*.exp
+/visual-studio-17-workspace/**/*.filters
 /visual-studio-17-workspace/**/*.iobj
 /visual-studio-17-workspace/**/*.pdb
 /visual-studio-17-workspace/**/*.ipdb
