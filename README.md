@@ -1,5 +1,5 @@
 # jwaveform
-A Java Wrapper for the Windows Waveform Functions
+A Java Wrapper for the [Windows Waveform Functions](https://docs.microsoft.com/en-us/windows/win32/multimedia/waveform-functions). 
 
 The following functions are not implemented:
 * auxGetDevCaps
