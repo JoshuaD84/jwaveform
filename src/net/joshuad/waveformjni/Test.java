@@ -41,6 +41,7 @@ public class Test {
             Thread.sleep(1);
           }
           waveOut.unprepareHeader(oldHeader);
+          oldHeader.close();
         }
         oldHeader = header;
       }
