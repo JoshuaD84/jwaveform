@@ -1,6 +1,23 @@
 # jwaveform
 A Java Wrapper for the [Windows Waveform Functions](https://docs.microsoft.com/en-us/windows/win32/multimedia/waveform-functions). 
 
+The following functions are implemented: 
+* waveOutClose
+* waveOutGetNumDevs
+* waveOutGetPitch
+* waveOutGetPlaybackRate
+* waveOutGetVolume
+* waveOutOpen
+* waveOutPause
+* waveOutPrepareHeader
+* waveOutReset
+* waveOutRestart
+* waveOutSetPitch
+* waveOutSetPlaybackRate
+* waveOutSetVolume
+* waveOutUnprepareHeader
+* waveOutWrite
+
 The following functions are not implemented:
 * auxGetDevCaps
 * auxGetNumDevs
