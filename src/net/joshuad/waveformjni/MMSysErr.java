@@ -25,5 +25,6 @@ public class MMSysErr {
   static final int WAVERR_BADFORMAT = 32;
   static final int WAVERR_STILLPLAYING = 33;
   static final int WAVERR_UNPREPARED = 34;
+  static final int WAVERR_SYNC = 35;
 
 }

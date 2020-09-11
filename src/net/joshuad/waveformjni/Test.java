@@ -12,6 +12,7 @@ public class Test {
   public static void main(String[] args) throws Exception {
     HWaveOut waveOut = new HWaveOut(2, 44100, 176400, 4, 16);
     for (int k = 0; k < 50; k++) {
+      waveOut.getVolume();
       InputStream inputStream = new FileInputStream("test5.wav");
       byte[] fileHeader = new byte[44];
       inputStream.read(fileHeader);

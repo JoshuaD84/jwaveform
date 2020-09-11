@@ -26,105 +26,105 @@ JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetNumDevs
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutGetPitch
- * Signature: (J)I
+ * Signature: (J)[I
  */
-JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPitch
-  (JNIEnv *, jobject, jlong);
+JNIEXPORT jintArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPitch
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutGetPlaybackRate
- * Signature: (J)I
+ * Signature: (J)[I
  */
-JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPlaybackRate
-  (JNIEnv *, jobject, jlong);
+JNIEXPORT jintArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPlaybackRate
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutGetVolume
- * Signature: (J)I
+ * Signature: (J)[I
  */
-JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetVolume
-  (JNIEnv *, jobject, jlong);
+JNIEXPORT jintArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetVolume
+  (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutOpen
- * Signature: (IIIII)J
+ * Signature: (IIIII)[J
  */
-JNIEXPORT jlong JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutOpen
+JNIEXPORT jlongArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutOpen
   (JNIEnv *, jclass, jint, jint, jint, jint, jint);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutPause
- * Signature: (J)V
+ * Signature: (J)I
  */
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutPause
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutPause
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutPrepareHeader
- * Signature: (JJ)V
+ * Signature: (JJ)I
  */
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutPrepareHeader
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutPrepareHeader
   (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutReset
- * Signature: (J)V
+ * Signature: (J)I
  */
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutReset
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutReset
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutRestart
- * Signature: (J)V
+ * Signature: (J)I
  */
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutRestart
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutRestart
   (JNIEnv *, jclass, jlong);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutSetPitch
- * Signature: (JI)V
+ * Signature: (JI)I
  */
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetPitch
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetPitch
   (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutSetPlaybackRate
- * Signature: (JI)V
+ * Signature: (JI)I
  */
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetPlaybackRate
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetPlaybackRate
   (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutSetVolume
- * Signature: (JI)V
+ * Signature: (JI)I
  */
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetVolume
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetVolume
   (JNIEnv *, jclass, jlong, jint);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutUnprepareHeader
- * Signature: (JJ)V
+ * Signature: (JJ)I
  */
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutUnprepareHeader
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutUnprepareHeader
   (JNIEnv *, jclass, jlong, jlong);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutWrite
- * Signature: (JJ)V
+ * Signature: (JJ)I
  */
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutWrite
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutWrite
   (JNIEnv *, jclass, jlong, jlong);
 
 /*

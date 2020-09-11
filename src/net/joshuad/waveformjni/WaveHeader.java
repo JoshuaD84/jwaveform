@@ -29,7 +29,7 @@ public class WaveHeader implements Closeable {
   public int getFlags() {
     return HWaveOut.getHeaderFlags(waveHeaderPointer);
   }
-
+  
   @Override
   public synchronized void close() {
     deleted = true;

@@ -24,78 +24,103 @@ JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetNumDevs
 	return waveOutGetNumDevs();
 }
 
-JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPitch
-(JNIEnv *, jobject, jlong hWaveOutPointer) {
-	DWORD retMe;
-	waveOutGetPitch(*(HWAVEOUT*)hWaveOutPointer, &retMe);
+JNIEXPORT jintArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPitch
+(JNIEnv* env, jclass, jlong hWaveOutPointer) {
+	DWORD pitch;
+	DWORD returnCode = waveOutGetPitch(*(HWAVEOUT*)hWaveOutPointer, &pitch);
+	jintArray retMe;
+	retMe = env->NewIntArray(2);
+	jint fill[2];
+	fill[0] = pitch;
+	fill[1] = returnCode;
+	env->SetIntArrayRegion(retMe, 0, 2, fill);
 	return retMe;
 }
 
-JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPlaybackRate
-(JNIEnv *, jobject, jlong hWaveOutPointer) {
-	DWORD retMe;
-	waveOutGetPlaybackRate(*(HWAVEOUT*)hWaveOutPointer, &retMe);
+JNIEXPORT jintArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPlaybackRate
+(JNIEnv* env, jclass, jlong hWaveOutPointer) {
+	DWORD playbackRate;
+	DWORD returnCode = waveOutGetPlaybackRate(*(HWAVEOUT*)hWaveOutPointer, &playbackRate);
+	jintArray retMe;
+	retMe = env->NewIntArray(2);
+	jint fill[2];
+	fill[0] = playbackRate;
+	fill[1] = returnCode;
+	env->SetIntArrayRegion(retMe, 0, 2, fill);
 	return retMe;
 }
 
-JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetVolume
-(JNIEnv *, jobject, jlong hWaveOutPointer) {
-	DWORD retMe;
-	waveOutGetVolume(*(HWAVEOUT*)hWaveOutPointer, &retMe);
+JNIEXPORT jintArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetVolume
+(JNIEnv* env, jclass, jlong hWaveOutPointer) {
+	DWORD volume;
+	DWORD returnCode = waveOutGetVolume(*(HWAVEOUT*)hWaveOutPointer, &volume);
+	jintArray retMe;
+	retMe = env->NewIntArray(2);
+	jint fill[2];
+	fill[0] = volume;
+	fill[1] = returnCode;
+	env->SetIntArrayRegion(retMe, 0, 2, fill);
 	return retMe;
 }
 
-JNIEXPORT jlong JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutOpen
-(JNIEnv *, jclass, jint nChannels, jint nSamplesPerSec, jint nAvgBytesPerSec, jint nBlockAlign, jint wBitsPerSample) {
+JNIEXPORT jlongArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutOpen
+(JNIEnv* env, jclass, jint nChannels, jint nSamplesPerSec, jint nAvgBytesPerSec, jint nBlockAlign, jint wBitsPerSample) {
 	HWAVEOUT* hWaveOut = new HWAVEOUT();
 	WAVEFORMATEX waveFormat = { WAVE_FORMAT_PCM, (WORD)nChannels, (DWORD)nSamplesPerSec, (DWORD)nAvgBytesPerSec, (WORD)nBlockAlign, (WORD)wBitsPerSample, 0 };
-	waveOutOpen(hWaveOut, WAVE_MAPPER, &waveFormat, 0, 0, CALLBACK_NULL);
-	return (jlong)hWaveOut;
+	int returnCode = waveOutOpen(hWaveOut, WAVE_MAPPER, &waveFormat, 0, 0, CALLBACK_NULL);
+	//return (jlong)hWaveOut;
+	jlongArray retMe;
+	retMe = env->NewLongArray(2);
+	jlong fill[2];
+	fill[0] = (jlong)hWaveOut;
+	fill[1] = returnCode;
+	env->SetLongArrayRegion(retMe, 0, 2, fill);
+	return retMe;
 }
 
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutPause
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutPause
 (JNIEnv *, jclass, jlong hWaveOutPointer) {
-	waveOutPause(*(HWAVEOUT*)hWaveOutPointer);
+	return waveOutPause(*(HWAVEOUT*)hWaveOutPointer);
 }
 
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutPrepareHeader
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutPrepareHeader
 (JNIEnv* env, jclass jclass, jlong hWaveOutPointer, jlong headerPointer) {
-	waveOutPrepareHeader(*(HWAVEOUT*)hWaveOutPointer, (WAVEHDR*)headerPointer, sizeof(WAVEHDR));
+	return waveOutPrepareHeader(*(HWAVEOUT*)hWaveOutPointer, (WAVEHDR*)headerPointer, sizeof(WAVEHDR));
 }
 
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutReset
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutReset
 (JNIEnv *, jclass, jlong hWaveOutPointer) {
-	waveOutReset(*(HWAVEOUT*)hWaveOutPointer);
+	return waveOutReset(*(HWAVEOUT*)hWaveOutPointer);
 }
 
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutRestart
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutRestart
 (JNIEnv *, jclass, jlong hWaveOutPointer) {
-	waveOutRestart(*(HWAVEOUT*)hWaveOutPointer);
+	return waveOutRestart(*(HWAVEOUT*)hWaveOutPointer);
 }
 
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetPitch
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetPitch
 (JNIEnv *, jclass, jlong hWaveOutPointer, jint jPitch) {
-	waveOutSetPitch(*(HWAVEOUT*)hWaveOutPointer, (DWORD)jPitch);
+	return waveOutSetPitch(*(HWAVEOUT*)hWaveOutPointer, (DWORD)jPitch);
 }
 
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetPlaybackRate
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetPlaybackRate
 (JNIEnv *, jclass, jlong hWaveOutPointer, jint jRate) {
-	waveOutSetPlaybackRate(*(HWAVEOUT*)hWaveOutPointer, (DWORD)jRate);
+	return waveOutSetPlaybackRate(*(HWAVEOUT*)hWaveOutPointer, (DWORD)jRate);
 }
 
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetVolume
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutSetVolume
 (JNIEnv *, jclass, jlong hWaveOutPointer, jint jVolume) {
-	waveOutSetVolume(*(HWAVEOUT*)hWaveOutPointer, (DWORD)jVolume);
+	return waveOutSetVolume(*(HWAVEOUT*)hWaveOutPointer, (DWORD)jVolume);
 }
 
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutUnprepareHeader
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutUnprepareHeader
 (JNIEnv * env, jclass, jlong hWaveOutPointer, jlong headerPointer) {
-	waveOutUnprepareHeader(*(HWAVEOUT*)hWaveOutPointer, (WAVEHDR*)headerPointer, sizeof(WAVEHDR));
+	return waveOutUnprepareHeader(*(HWAVEOUT*)hWaveOutPointer, (WAVEHDR*)headerPointer, sizeof(WAVEHDR));
 }
 
-JNIEXPORT void JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutWrite
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutWrite
 (JNIEnv * env, jclass, jlong hWaveOutPointer, jlong headerPointer) {
-	waveOutWrite(*(HWAVEOUT*)hWaveOutPointer, (WAVEHDR*)headerPointer, sizeof(WAVEHDR));
+	return waveOutWrite(*(HWAVEOUT*)hWaveOutPointer, (WAVEHDR*)headerPointer, sizeof(WAVEHDR));
 }
 
 JNIEXPORT jlong JNICALL Java_net_joshuad_waveformjni_HWaveOut_createHeader
