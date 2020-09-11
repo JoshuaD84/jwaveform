@@ -38,11 +38,6 @@ JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPlaybackR
 	return retMe;
 }
 
-JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPosition
-(JNIEnv *, jclass, jlong) {
-	return 0;
-}
-
 JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetVolume
 (JNIEnv *, jobject, jlong hWaveOutPointer) {
 	DWORD retMe;

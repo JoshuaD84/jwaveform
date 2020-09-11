@@ -41,14 +41,6 @@ JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPlaybackR
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
- * Method:    waveOutGetPosition
- * Signature: (J)I
- */
-JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPosition
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutGetVolume
  * Signature: (J)I
  */

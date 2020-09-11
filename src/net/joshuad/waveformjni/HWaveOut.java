@@ -43,10 +43,6 @@ public class HWaveOut {
     return waveOutGetPlaybackRate(hWaveOutPointer);
   }
 
-  public int getPosition() throws InvalidHandleException, NoDriverException, NoMemoryException {
-    return waveOutGetPosition(hWaveOutPointer);
-  }
-
   public int getVolume()
       throws InvalidHandleException, NoDriverException, NoMemoryException, NotSupportedException {
     return waveOutGetVolume(hWaveOutPointer);
@@ -128,8 +124,6 @@ public class HWaveOut {
   
   private static native int waveOutGetPlaybackRate(long hWaveOutPointer);
 
-  private static native int waveOutGetPosition(long hWaveOutPointer);
-  
   private static native int waveOutGetVolume(long hWaveOutPointer);
 
   private static native long waveOutOpen(int nChannels, int nSamplesPerSec, int nAvgBytesPerSec,
