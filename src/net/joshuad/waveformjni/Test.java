@@ -10,21 +10,22 @@ public class Test {
   }
 
   public static void main(String[] args) throws Exception {
-    HWaveOut waveOut = new HWaveOut(2, 44100, 176400, 4, 16);
+    int channels = 2;
+    int sampleRate = 44100;
+    int bitsPerSample = 16;
+    int byteRate = sampleRate * channels * bitsPerSample / 8;
+    int blockAlign = channels * bitsPerSample / 8;
+    HWaveOut waveOut = new HWaveOut(channels, sampleRate, byteRate, blockAlign, bitsPerSample);
+    WaveHeader oldHeader = null;
+    final int increment = 20000;
     for (int k = 0; k < 50; k++) {
-      waveOut.getVolume();
-      InputStream inputStream = new FileInputStream("test5.wav");
+      InputStream inputStream = new FileInputStream("test2.wav");
       byte[] fileHeader = new byte[44];
       inputStream.read(fileHeader);
-      final int increment = 80000;
-      WaveHeader oldHeader = null;
       while (true) {
         byte[] buffer = new byte[increment];
         int bytesRead = inputStream.read(buffer, 0, increment);
         if (bytesRead <= 0) {
-          while ((oldHeader.getFlags() & WaveHeader.DONE) != WaveHeader.DONE) {
-            Thread.sleep(1);
-          }
           break;
         } else if (bytesRead < increment) {
           buffer = Arrays.copyOfRange(buffer, 0, bytesRead);

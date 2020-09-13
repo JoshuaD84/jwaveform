@@ -7,8 +7,6 @@
 #include "net_joshuad_waveformjni_HWaveOut.h"
 #pragma comment(lib, "winmm.lib")
 
-#pragma comment(lib, "winmm.lib")
-
 void asCharArray(JNIEnv * env, jbyteArray array, char* targetBuffer) {
 	int len = env->GetArrayLength(array);
 	env->GetByteArrayRegion(array, 0, len, reinterpret_cast<jbyte*>(targetBuffer));
