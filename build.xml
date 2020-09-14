@@ -1,0 +1,47 @@
+<project name="Waveform JNI" default="compile" basedir=".">
+
+	<property name="version" value="Alpha 1" />
+	<property name="version-simple" value="a1" />
+	<property name="version-tag" value="${version}" />
+
+	<property name="src" location="src"/>
+	<property name="temp" location="temp" />
+	<property name="build" location="ant-bin" />
+
+	<property name="jarFile" location="waveformjni-${version-simple}.jar" />
+
+	<buildnumber file="build.num"/>
+
+	<target name="init">
+		<tstamp />
+		<mkdir dir="${build}"/>
+	</target>
+
+	<target name="compile" depends="init" description="compile the source">
+		<javac fork="yes" target="13" source ="13" includeantruntime="false" srcdir="." 
+				destdir="${build}" encoding="utf-8">
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile" description="Create a jar.">
+		<jar destfile="${jarFile}" basedir="${build}">
+			<manifest>
+				<attribute name="Implementation-Version" value="${version}" />
+				<attribute name="Build-Date" value="${TODAY}" />
+				<attribute name="Build-Number" value="${build.number}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="distribution" depends="jar" description="Make a full zip file for windows.">
+		<delete dir="${temp}" />
+		<mkdir dir="${temp}/waveformjni/" />
+		<copy todir="${temp}/waveformjni/">
+			<fileset file="${jarFile}" />
+			<fileset file="vs17-workspace/x64/Release/WaveformJNI.dll" />
+		</copy>
+		<zip destfile="WaveformJNI-${version-simple}.zip" basedir="${temp}" />
+		<delete dir="${temp}" />
+	</target>
+</project>
+
