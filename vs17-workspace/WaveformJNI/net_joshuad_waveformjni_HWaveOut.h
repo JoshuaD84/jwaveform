@@ -41,6 +41,14 @@ JNIEXPORT jintArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPlay
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
+ * Method:    waveOutGetPositionBytes
+ * Signature: (J)[J
+ */
+JNIEXPORT jlongArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPositionBytes
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutGetVolume
  * Signature: (J)[I
  */

@@ -33,6 +33,7 @@ public class DoubleBufferTest {
       subChunk2Size = bf.getInt(40);
       System.out.println("subChunk2Size: " + subChunk2Size);
       while (true) {
+        System.out.println("Position: " + waveOut.getPosition());
         byte[] buffer;
         if ( subChunk2Size - bytesRead <= 0) {
           bytesRead = 0;

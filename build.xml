@@ -1,14 +1,15 @@
 <project name="Waveform JNI" default="compile" basedir=".">
 
-	<property name="version" value="Alpha 1" />
-	<property name="version-simple" value="a1" />
+	<property name="version" value="0.0.1" />
+	<property name="version-simple" value="0.0.1" />
 	<property name="version-tag" value="${version}" />
 
 	<property name="src" location="src"/>
 	<property name="temp" location="temp" />
 	<property name="build" location="ant-bin" />
 
-	<property name="jarFile" location="waveformjni-${version-simple}.jar" />
+	<property name="classJarFile" location="waveformjni-${version-simple}.jar" />
+	<property name="sourceJarFile" location="waveformjni-${version-simple}-sources.jar" />
 
 	<buildnumber file="build.num"/>
 
@@ -23,8 +24,8 @@
 		</javac>
 	</target>
 
-	<target name="jar" depends="compile" description="Create a jar.">
-		<jar destfile="${jarFile}" basedir="${build}">
+	<target name="class-jar" depends="compile" description="Create the class jar.">
+		<jar destfile="${classJarFile}" basedir="${build}">
 			<manifest>
 				<attribute name="Implementation-Version" value="${version}" />
 				<attribute name="Build-Date" value="${TODAY}" />
@@ -33,15 +34,31 @@
 		</jar>
 	</target>
 
-	<target name="distribution" depends="jar" description="Make a full zip file for windows.">
+	<target name="source-jar" description="Create the source jar.">
+		<jar destfile="${sourceJarFile}" basedir="${src}">
+			<manifest>
+				<attribute name="Implementation-Version" value="${version}" />
+				<attribute name="Build-Date" value="${TODAY}" />
+				<attribute name="Build-Number" value="${build.number}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="distribution" depends="class-jar, source-jar" description="Make a full zip file.">
 		<delete dir="${temp}" />
 		<mkdir dir="${temp}/waveformjni/" />
 		<copy todir="${temp}/waveformjni/">
-			<fileset file="${jarFile}" />
 			<fileset file="vs17-workspace/x64/Release/WaveformJNI.dll" />
+			<globmapper from="WaveformJNI.dll" to="waveformjni-${version}.dll" />
+		</copy>
+		<copy todir="${temp}/waveformjni/">
+			<fileset file="${classJarFile}" />
+			<fileset file="${sourceJarFile}" />
 		</copy>
 		<zip destfile="WaveformJNI-${version-simple}.zip" basedir="${temp}" />
 		<delete dir="${temp}" />
+		<delete file="${classJarFile}" />
+		<delete file="${sourceJarFile}" />
 	</target>
 </project>
 

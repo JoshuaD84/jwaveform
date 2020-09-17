@@ -18,6 +18,9 @@ The following functions are implemented:
 * waveOutUnprepareHeader
 * waveOutWrite
 
+The following functions are partially implemented: 
+* waveInGetPosition
+
 The following functions are not implemented:
 * auxGetDevCaps
 * auxGetNumDevs
@@ -32,7 +35,6 @@ The following functions are not implemented:
 * waveInGetErrorText
 * waveInGetID
 * waveInGetNumDevs
-* waveInGetPosition
 * waveInMessage
 * waveInOpen
 * waveInPrepareHeader

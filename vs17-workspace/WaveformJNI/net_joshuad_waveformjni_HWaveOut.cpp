@@ -48,12 +48,29 @@ JNIEXPORT jintArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPlay
 	return retMe;
 }
 
+JNIEXPORT jlongArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetPositionBytes
+(JNIEnv* env, jclass, jlong hWaveOutPointer) {
+	MMTIME cMMTime = MMTIME{ TIME_BYTES, 0 };
+	DWORD returnCode = waveOutGetPosition(*(HWAVEOUT*)hWaveOutPointer, &cMMTime, sizeof(cMMTime));
+	long value;
+	if (cMMTime.wType == TIME_BYTES) {
+		value = cMMTime.u.cb;
+	} else {
+		value = -1;
+	}
+	jlongArray retMe = env->NewLongArray(2);
+	jlong fill[2];
+	fill[0] = value;
+	fill[1] = returnCode;
+	env->SetLongArrayRegion(retMe, 0, 2, fill);
+	return retMe;
+}
+
 JNIEXPORT jintArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetVolume
 (JNIEnv* env, jclass, jlong hWaveOutPointer) {
 	DWORD volume;
 	DWORD returnCode = waveOutGetVolume(*(HWAVEOUT*)hWaveOutPointer, &volume);
-	jintArray retMe;
-	retMe = env->NewIntArray(2);
+	jintArray retMe = env->NewIntArray(2);
 	jint fill[2];
 	fill[0] = volume;
 	fill[1] = returnCode;

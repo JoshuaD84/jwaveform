@@ -82,6 +82,23 @@ public class HWaveOut {
     return retValue[0];
   }
 
+  public long getPosition()
+      throws InvalidHandleException, NoDriverException, NoMemoryException, NotSupportedException {
+    long[] retValue = waveOutGetPositionBytes(hWaveOutPointer);
+    int returnStatus = (int) retValue[1];
+    if (returnStatus == MMSysErr.MMSYSERR_INVALHANDLE) {
+      throw new InvalidHandleException();
+    } else if (returnStatus == MMSysErr.MMSYSERR_NODRIVER) {
+      throw new NoDriverException();
+    } else if (returnStatus == MMSysErr.MMSYSERR_NOMEM) {
+      throw new NoMemoryException();
+    } else if (retValue[0] == -1) {
+      // This happens when we ask for TIME_BYTES, but get something else instead
+      throw new NotSupportedException();
+    }
+    return retValue[0];
+  }
+  
   public int getVolume()
       throws InvalidHandleException, NoDriverException, NoMemoryException, NotSupportedException {
     int[] retValue = waveOutGetVolume(hWaveOutPointer);
@@ -234,9 +251,11 @@ public class HWaveOut {
   private static native int[] waveOutGetPitch(long hWaveOutPointer);
 
   private static native int[] waveOutGetPlaybackRate(long hWaveOutPointer);
+  
+  private static native long[] waveOutGetPositionBytes(long hWaveOutPointer);
 
   private static native int[] waveOutGetVolume(long hWaveOutPointer);
-
+  
   private static native long[] waveOutOpen(int nChannels, int nSamplesPerSec, int nAvgBytesPerSec,
       int nBlockAlign, int wBitsPerSample);
 
