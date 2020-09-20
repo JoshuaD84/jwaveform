@@ -58,10 +58,10 @@ JNIEXPORT jintArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetVolu
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutOpen
- * Signature: (IIIIII)[J
+ * Signature: (IIIII)[J
  */
 JNIEXPORT jlongArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutOpen
-  (JNIEnv *, jclass, jint, jint, jint, jint, jint, jint);
+  (JNIEnv *, jclass, jint, jint, jint, jint, jint);
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut

@@ -10,11 +10,11 @@ public class HWaveOut {
   // PUBLIC JAVA INTERFACE
   ////////////////////////
 
-  public HWaveOut(int nChannels, int nSamplesPerSec, int nAvgBytesPerSec, int nBlockAlign,
-      int wBitsPerSample) throws AllocatedException, BadDeviceException, NoDriverException,
-      NoMemoryException, BadFormatException, SyncException {
-    long[] retValue =
-        waveOutOpen(nChannels, nSamplesPerSec, nAvgBytesPerSec, nBlockAlign, wBitsPerSample);
+  public HWaveOut(int wFormatTag, int nChannels, int nSamplesPerSec, int nAvgBytesPerSec,
+      int nBlockAlign, int wBitsPerSample) throws AllocatedException, BadDeviceException,
+      NoDriverException, NoMemoryException, BadFormatException, SyncException {
+    long[] retValue = waveOutOpen(wFormatTag, nChannels, nSamplesPerSec, nAvgBytesPerSec,
+        nBlockAlign, wBitsPerSample);
     hWaveOutPointer = retValue[0];
     long returnStatus = retValue[1];
     if (returnStatus == MMSysErr.MMSYSERR_ALLOCATED) {
@@ -26,7 +26,13 @@ public class HWaveOut {
     } else if (returnStatus == MMSysErr.MMSYSERR_NOMEM) {
       throw new NoMemoryException();
     } else if (returnStatus == MMSysErr.WAVERR_BADFORMAT) {
-      throw new BadFormatException();
+      String format = "Format: " + wFormatTag + "\n" +
+          "Channels: " + nChannels + "\n" +
+          "Samples Per Sec: " + nSamplesPerSec + "\n" +
+          "Avg Bytes Per Sec: " + nAvgBytesPerSec + "\n" +
+          "Block Align: " + nBlockAlign + "\n" + 
+          "bits Per Sample:" + wBitsPerSample;
+      throw new BadFormatException(format);
     } else if (returnStatus == MMSysErr.WAVERR_SYNC) {
       throw new SyncException();
     }
@@ -82,7 +88,7 @@ public class HWaveOut {
     return retValue[0];
   }
 
-  public long getPosition()
+  public long getPositionBytes()
       throws InvalidHandleException, NoDriverException, NoMemoryException, NotSupportedException {
     long[] retValue = waveOutGetPositionBytes(hWaveOutPointer);
     int returnStatus = (int) retValue[1];
@@ -256,8 +262,8 @@ public class HWaveOut {
 
   private static native int[] waveOutGetVolume(long hWaveOutPointer);
   
-  private static native long[] waveOutOpen(int nChannels, int nSamplesPerSec, int nAvgBytesPerSec,
-      int nBlockAlign, int wBitsPerSample);
+  private static native long[] waveOutOpen(int wFormatTag, int nChannels, int nSamplesPerSec,
+      int nAvgBytesPerSec, int nBlockAlign, int wBitsPerSample);
 
   private static native int waveOutPause(long hWaveOutPointer);
 

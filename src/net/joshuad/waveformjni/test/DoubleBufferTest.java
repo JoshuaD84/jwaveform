@@ -9,17 +9,18 @@ import net.joshuad.waveformjni.WaveHeader;
 
 public class DoubleBufferTest {
   static {
-    System.load(
-        System.getProperty("user.dir") + "\\vs17-workspace\\x64\\Release\\WaveformJNI.dll");
+    System.load(System.getProperty("user.dir") + "\\vs17-workspace\\x64\\Release\\WaveformJNI.dll");
   }
 
   public static void main(String[] args) throws Exception {
     int channels = 2;
+    int format = 0x0001; // PCM
     int sampleRate = 44100;
     int bitsPerSample = 16;
     int byteRate = sampleRate * channels * bitsPerSample / 8;
     int blockAlign = channels * bitsPerSample / 8;
-    HWaveOut waveOut = new HWaveOut(channels, sampleRate, byteRate, blockAlign, bitsPerSample);
+    HWaveOut waveOut =
+        new HWaveOut(format, channels, sampleRate, byteRate, blockAlign, bitsPerSample);
     WaveHeader oldHeader = null;
     final int increment = 40000;
     int bytesRead = 0;
@@ -33,9 +34,9 @@ public class DoubleBufferTest {
       subChunk2Size = bf.getInt(40);
       System.out.println("subChunk2Size: " + subChunk2Size);
       while (true) {
-        System.out.println("Position: " + waveOut.getPosition());
+        System.out.println("Position: " + waveOut.getPositionBytes());
         byte[] buffer;
-        if ( subChunk2Size - bytesRead <= 0) {
+        if (subChunk2Size - bytesRead <= 0) {
           bytesRead = 0;
           break;
         } else if (subChunk2Size - bytesRead > increment) {

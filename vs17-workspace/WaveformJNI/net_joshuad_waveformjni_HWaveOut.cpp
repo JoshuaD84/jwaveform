@@ -79,9 +79,9 @@ JNIEXPORT jintArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetVolu
 }
 
 JNIEXPORT jlongArray JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutOpen
-(JNIEnv* env, jclass, jint nChannels, jint nSamplesPerSec, jint nAvgBytesPerSec, jint nBlockAlign, jint wBitsPerSample) {
+(JNIEnv* env, jclass, jint wFormat, jint nChannels, jint nSamplesPerSec, jint nAvgBytesPerSec, jint nBlockAlign, jint wBitsPerSample) {
 	HWAVEOUT* hWaveOut = new HWAVEOUT();
-	WAVEFORMATEX waveFormat = { WAVE_FORMAT_PCM, (WORD)nChannels, (DWORD)nSamplesPerSec, (DWORD)nAvgBytesPerSec, (WORD)nBlockAlign, (WORD)wBitsPerSample, 0 };
+	WAVEFORMATEX waveFormat = { (WORD)wFormat, (WORD)nChannels, (DWORD)nSamplesPerSec, (DWORD)nAvgBytesPerSec, (WORD)nBlockAlign, (WORD)wBitsPerSample, 0 };
 	int returnCode = waveOutOpen(hWaveOut, WAVE_MAPPER, &waveFormat, 0, 0, CALLBACK_NULL);
 	//return (jlong)hWaveOut;
 	jlongArray retMe;
