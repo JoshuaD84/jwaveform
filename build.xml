@@ -1,7 +1,7 @@
 <project name="Waveform JNI" default="compile" basedir=".">
 
-	<property name="version" value="0.0.1" />
-	<property name="version-simple" value="0.0.1" />
+	<property name="version" value="0.0.2" />
+	<property name="version-simple" value="0.0.2" />
 	<property name="version-tag" value="${version}" />
 
 	<property name="src" location="src"/>

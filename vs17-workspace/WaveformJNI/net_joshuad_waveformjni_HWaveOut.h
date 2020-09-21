@@ -17,6 +17,14 @@ JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutClose
 
 /*
  * Class:     net_joshuad_waveformjni_HWaveOut
+ * Method:    waveOutGetDevCaps
+ * Signature: (Lnet/joshuad/waveformjni/WaveOutCaps;)I
+ */
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetDevCaps
+  (JNIEnv *, jclass, jobject);
+
+/*
+ * Class:     net_joshuad_waveformjni_HWaveOut
  * Method:    waveOutGetNumDevs
  * Signature: ()I
  */

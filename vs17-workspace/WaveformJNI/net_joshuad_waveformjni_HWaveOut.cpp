@@ -17,6 +17,29 @@ JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutClose
 	return waveOutClose(*(HWAVEOUT*)hWaveOutPointer);
 }
 
+JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetDevCaps
+(JNIEnv * env, jclass, jobject fillMe) {
+	WAVEOUTCAPS wCaps;
+	int retMe = waveOutGetDevCaps(WAVE_MAPPER, &wCaps, sizeof(WAVEOUTCAPS));
+	jclass javaWCapsClass = env->FindClass("net/joshuad/waveformjni/WaveOutCaps");
+	jmethodID setWMidID = env->GetMethodID(javaWCapsClass, "setWMid", "(S)V");
+	env->CallObjectMethod(fillMe, setWMidID, 1);
+	jmethodID setWPidID = env->GetMethodID(javaWCapsClass, "setWPid", "(S)V");
+	env->CallObjectMethod(fillMe, setWPidID, wCaps.wPid);
+	jmethodID setVDriverVersion = env->GetMethodID(javaWCapsClass, "setVDriverVersion", "(S)V");
+	env->CallObjectMethod(fillMe, setVDriverVersion, wCaps.vDriverVersion);
+	jstring productName = env->NewStringUTF(wCaps.szPname);
+	jmethodID setProductName = env->GetMethodID(javaWCapsClass, "setProductName", "(Ljava/lang/String;)V");
+	env->CallObjectMethod(fillMe, setProductName, productName);
+	jmethodID setDwFormats = env->GetMethodID(javaWCapsClass, "setDwFormats", "(I)V");
+	env->CallObjectMethod(fillMe, setDwFormats, wCaps.dwFormats);
+	jmethodID setwChannels = env->GetMethodID(javaWCapsClass, "setWChannels", "(S)V");
+	env->CallObjectMethod(fillMe, setwChannels, wCaps.wChannels);
+	jmethodID setDwSupport = env->GetMethodID(javaWCapsClass, "setDwSupport", "(I)V");
+	env->CallObjectMethod(fillMe, setDwSupport, wCaps.dwSupport);
+	return retMe;
+}
+
 JNIEXPORT jint JNICALL Java_net_joshuad_waveformjni_HWaveOut_waveOutGetNumDevs
 (JNIEnv *, jclass) {
 	return waveOutGetNumDevs();

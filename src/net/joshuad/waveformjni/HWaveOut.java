@@ -51,6 +51,20 @@ public class HWaveOut {
       throw new StillPlayingException();
     }
   }
+  
+  public static WaveOutCaps getDevCaps()
+      throws BadDeviceException, NoDriverException, NoMemoryException {
+    WaveOutCaps retMe = new WaveOutCaps();
+    int returnStatus = waveOutGetDevCaps(retMe);
+    if (returnStatus == MMSysErr.MMSYSERR_BADDEVICEID) {
+      throw new BadDeviceException();
+    } else if (returnStatus == MMSysErr.MMSYSERR_NODRIVER) {
+      throw new NoDriverException();
+    } else if (returnStatus == MMSysErr.MMSYSERR_NOMEM) {
+      throw new NoMemoryException();
+    }
+    return retMe;
+  }
 
   public static int getNumDevs() {
     return waveOutGetNumDevs();
@@ -251,6 +265,8 @@ public class HWaveOut {
 
 
   private static native int waveOutClose(long hWaveOutPointer);
+  
+  private static native int waveOutGetDevCaps(WaveOutCaps fillMe);
 
   private static native int waveOutGetNumDevs();
 

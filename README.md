@@ -3,6 +3,7 @@ A Java Wrapper for the [Windows Waveform Functions](https://docs.microsoft.com/e
 
 The following functions are implemented: 
 * waveOutClose
+* waveOutGetDevCaps
 * waveOutGetNumDevs
 * waveOutGetPitch
 * waveOutGetPlaybackRate
@@ -19,7 +20,7 @@ The following functions are implemented:
 * waveOutWrite
 
 The following functions are partially implemented: 
-* waveInGetPosition
+* waveOutGetPosition (Bytes only)
 
 The following functions are not implemented:
 * auxGetDevCaps
@@ -35,6 +36,7 @@ The following functions are not implemented:
 * waveInGetErrorText
 * waveInGetID
 * waveInGetNumDevs
+* waveInGetPosition
 * waveInMessage
 * waveInOpen
 * waveInPrepareHeader
@@ -44,14 +46,12 @@ The following functions are not implemented:
 * waveInStop
 * waveInUnprepareHeader
 * waveOutBreakLoop
-* waveOutGetDevCaps
 * waveOutGetErrorText
 * waveOutGetID
 * waveOutMessage
-* waveOutGetPosition
 * waveOutProc
 
-In addition
+In addition:
 * not all WAVEHDR functionality is implemented
 * callbacks are not implemented. 
 
